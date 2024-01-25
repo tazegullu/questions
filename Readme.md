@@ -1,0 +1,1 @@
+[Rastgele Soru Uygulaması](https://tazegullu.github.io/questions)

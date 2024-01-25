@@ -1,3 +1,25 @@
-questions
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1>C# Rasgele Soru Uygulaması</h1>
+    
+    <button id="question_button" onclick="RandomQuestion()">Random Question</button>
+    
+    <p style="display: none;" id="question_text">Soru</p>
 
-asdasd
+    <button style="display: none;" id="answer_button" onclick="ShowAnswer()">Cevabı Göster</button>
+    
+    <p style="display: none;" id="answer_text">Cevap</p>
+
+    <div style="display: flex;">
+        <button style="display: none;" id="yes_button" onclick="Yes()">Yes</button>
+        <button style="display: none;" id="no_button" onclick="No()">No</button>
+    </div>
+    </body>
+</html>
