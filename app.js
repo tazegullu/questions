@@ -14,13 +14,16 @@ function RandomQuestion() {
     document.getElementById("question_text").innerHTML = questions[random].q;
     document.getElementById("question_text").style.display = "block";
     document.getElementById("answer_button").style.display = "block";
+    document.getElementById("answer_button").style.margin = "auto";
 }
 
 function ShowAnswer(){
     document.getElementById("answer_text").innerHTML = questions[random].a;
     document.getElementById("answer_text").style.display = "block";
     document.getElementById("yes_button").style.display = "block";
+    document.getElementById("yes_button").style.margin = "auto";
     document.getElementById("no_button").style.display = "block";
+    document.getElementById("no_button").style.margin = "auto";
 }
 
 function Yes() {

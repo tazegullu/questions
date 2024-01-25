@@ -3,23 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
     <script src="app.js"></script>
+    <link href="main.css" rel="stylesheet">
 </head>
-<body>
-    <h1>C# Rasgele Soru Uygulaması</h1>
-    
-    <button id="question_button" onclick="RandomQuestion()">Random Question</button>
-    
-    <p style="display: none;" id="question_text">Soru</p>
-
-    <button style="display: none;" id="answer_button" onclick="ShowAnswer()">Cevabı Göster</button>
-    
-    <p style="display: none;" id="answer_text">Cevap</p>
-
-    <div style="display: flex;">
-        <button style="display: none;" id="yes_button" onclick="Yes()">Yes</button>
-        <button style="display: none;" id="no_button" onclick="No()">No</button>
+<body id="backgroundBody">
+    <div id="workArea">
+        <table>
+            <tr>
+                <td colspan="2">
+                    <h1>C# Rasgele Soru Uygulaması</h1>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button id="question_button" type="button" class="btn btn-primary btn-lg" onclick="RandomQuestion()">Random Question</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p style="display: none;" id="question_text">Soru</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button id="answer_button" type="button" class="btn btn-primary btn-lg" style="display: none;" onclick="ShowAnswer()">Cevabı Göster</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p style="display: none;" id="answer_text">Cevap</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button style="display: none;" id="yes_button" type="button" class="btn btn-primary" onclick="Yes()">Yes</button>
+                </td>
+                <td>
+                    <button style="display: none;" id="no_button" type="button" class="btn btn-primary" onclick="No()">No</button>
+                </td>
+            </tr>
+        </table>
     </div>
     </body>
 </html>
