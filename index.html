@@ -8,8 +8,8 @@
     <script src="app.js"></script>
     <link href="main.css" rel="stylesheet">
 </head>
-<body id="backgroundBody">
-    <div id="workArea">
+<body id="body_background">
+    <div id="div_workArea">
         <table>
             <tr>
                 <td colspan="2">
@@ -18,30 +18,35 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <button id="question_button" type="button" class="btn btn-primary btn-lg" onclick="RandomQuestion()">Random Question</button>
+                    <button id="button_question" type="button" class="btn btn-primary btn-lg" onclick="RandomQuestion()">Random Question</button>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <p style="display: none;" id="question_text">Soru</p>
+                    <p id="p_subject" style="display: none;">Konu</p>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <button id="answer_button" type="button" class="btn btn-primary btn-lg" style="display: none;" onclick="ShowAnswer()">Cevabı Göster</button>
+                    <p id="p_question" style="display: none;">Soru</p>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <p style="display: none;" id="answer_text">Cevap</p>
+                    <button id="button_answer" style="display: none;" type="button" class="btn btn-primary btn-lg" onclick="ShowAnswer()">Cevabı Göster</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p id="p_answer" style="display: none;">Cevap</p>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <button style="display: none;" id="yes_button" type="button" class="btn btn-primary" onclick="Yes()">Yes</button>
+                    <button id="button_yes" style="display: none;" type="button" class="btn btn-primary" onclick="Yes()">Yes</button>
                 </td>
                 <td>
-                    <button style="display: none;" id="no_button" type="button" class="btn btn-primary" onclick="No()">No</button>
+                    <button id="button_no" style="display: none;" type="button" class="btn btn-primary" onclick="No()">No</button>
                 </td>
             </tr>
         </table>
