@@ -1,93 +1,128 @@
 //! CTRL+SHIFT+D Tüm konsol loglarını temizle
 //! CTRL + Ö console loglarını yorum yap
-
 window.onload = function (){
-    //localStorage.setItem("key","value");
-    //localStorage.getItem("key");
-    //localStorage.removeItem("key");
-    //localStorage.clear();
-    //let array = ["1","2","3","4","5"];
-    //localStorage.setItem("keyArray",array);//Hepsini tek bir string olarak yazar
-    //localStorage.setItem("keyArray",JSON.stringify(array));//array formatında yazar.
-    //let getArray = JSON.parse(localStorage.getItem("keyArray"));//array olarak alır.
-    questions = questions.concat(cSharpBasicPreparingList);
-    questions = questions.concat(cSharpBasicVariablesList);
-    questions = questions.concat(cSharpBasicOperatorsList);
-    questions = questions.concat(cSharpBasicflowControlList);
-    questions = questions.concat(cSharpBasicErrorControlList);
-    questions = questions.concat(cSharpBasicLoopsList);
-    questions = questions.concat(cSharpBasicHelperCommandsList);
-    questions = questions.concat(cSharpBasicArraysList);
-    questions = questions.concat(cSharBasicStringsList);
-
-    localStorage.setItem("stored_questions",JSON.stringify(questions));
-
-    if("stored_questions" in localStorage)
-        questions = JSON.parse(localStorage.getItem("stored_questions"));
-    else
-        localStorage.setItem("stored_questions",JSON.stringify(questions));
-
-    
-    console.log(questions);
+    CombineQuestionLists();
+    CreateDetailedObjectLis();
 };
 
+//#region Variables
+let combinedRawLists = [];
+let detailedMainList = [];
+let currentSelectedQuestions = [];
+let currentQuestion;
+//#endregion
 
-let random = 0;
+//#region Onload Methods
+function CombineQuestionLists(){
+    combinedRawLists = combinedRawLists.concat(cSharpBasicPreparingList);
+    combinedRawLists = combinedRawLists.concat(cSharpBasicVariablesList);
+    combinedRawLists = combinedRawLists.concat(cSharpBasicOperatorsList);
+    combinedRawLists = combinedRawLists.concat(cSharpBasicflowControlList);
+    combinedRawLists = combinedRawLists.concat(cSharpBasicErrorControlList);
+    combinedRawLists = combinedRawLists.concat(cSharpBasicLoopsList);
+    combinedRawLists = combinedRawLists.concat(cSharpBasicHelperCommandsList);
+    combinedRawLists = combinedRawLists.concat(cSharpBasicArraysList);
+    combinedRawLists = combinedRawLists.concat(cSharpBasicStringsList);
+}
+function CreateDetailedObjectLis(){
+    let idCounter = 0;
+    combinedRawLists.forEach(element => {
+        let subjects = element.subject.split("-->");
 
-function RandomQuestion() {
-    document.getElementById("button_answer").style.display = "none";
-    document.getElementById("p_answer").style.display = "none";
-    document.getElementById("button_yes").style.display = "none";
-    document.getElementById("button_no").style.display = "none";
-    document.getElementById("p_subject").style.display = "none";
+        var object = {};
+        object["id"] = idCounter++;
+        object["main_subject"] = element.level;
+        object["subject"] = subjects[1];
+        object["subtitle"] = subjects.length === 3 ? subjects[2] : "";
+        object["question"] = element.question;
+        object["answer"] = element.answer;
+        object["correct_count"] = 0;
+        object["wrong_count"] = 0;
+
+        detailedMainList.push(object);
+    });
+}
+//#endregion
+
+//#region Onclick Methods
+function onclick_RandomQuestion() {
+    document.getElementById("div_QuestionButton").style.display = "none";
+    currentSelectedQuestions = detailedMainList;
+    ShowQuestion();    
+}
+function onclick_QuestionBySubjects(){
+    alert("Yapım aşamasında...")
+}
+function onclick_ShowAnswer(){
+    document.getElementById("div_Answer").innerHTML = currentQuestion.answer;
+    document.getElementById("div_Answer").style.display = "block";
+    document.getElementById("div_YesNoReturnButtons").style.display = "flex";
+}
+function onclick_Yes() {
+    currentQuestion.correctAnswers++;
+    ShowQuestion();
+}
+function onclick_No() {
+    currentQuestion.wrongAnswers++;
+    ShowQuestion();
+}
+function onclick_Return(){
+    //document.getElementById("div_SubjectSelect").style.display = "none";
+    document.getElementById("div_Subject").style.display = "none";
+    document.getElementById("div_Question").style.display = "none";
+    document.getElementById("div_AnswerButton").style.display = "none";
+    document.getElementById("div_Answer").style.display = "none";
+    document.getElementById("div_YesNoReturnButtons").style.display = "none";
+    document.getElementById("div_QuestionButton").style.display = "flex";
+    
+}
+//#endregion
+
+//#region Helper Methods
+function ShowQuestion(){
+    document.getElementById("div_Answer").style.display = "none";
+    document.getElementById("div_YesNoReturnButtons").style.display = "none";
 
     FindQuestion();
-    document.getElementById("p_question").innerHTML = questions[random].question;
-    document.getElementById("p_subject").innerHTML = "Konu: " + questions[random].subject;
-    document.getElementById("p_subject").style.display = "block";
-    document.getElementById("p_question").style.display = "block";
-    document.getElementById("button_answer").style.display = "block";
-    document.getElementById("button_answer").style.margin = "auto";
-}
+    console.log(currentQuestion);
 
-function ShowAnswer(){
-    document.getElementById("p_answer").innerHTML = questions[random].answer;
-    document.getElementById("p_answer").style.display = "block";
-    document.getElementById("button_yes").style.display = "block";
-    document.getElementById("button_yes").style.margin = "auto";
-    document.getElementById("button_no").style.display = "block";
-    document.getElementById("button_no").style.margin = "auto";
-}
+    let subtitle = currentQuestion.subtitle === "" ? "" : "-->" + currentQuestion.subtitle;
+    document.getElementById("span_Subject").innerHTML = `${currentQuestion.main_subject}-->${currentQuestion.subject}${subtitle}`;
+    document.getElementById("div_Question").innerHTML = currentQuestion.question;
 
-function Yes() {
-    if(questions[random].difficulty !== 2) questions[random].difficulty++;
-    UpdateLocalStorage();
-    if(questions.filter(x => x.difficulty === 2).length === questions.length)
-        alert("Tebrikler, bu konudaki tüm soruları en az 2 kez bildiniz!")
-    RandomQuestion();
+    document.getElementById("div_Subject").style.display = "block";
+    document.getElementById("div_Question").style.display = "block";
+    document.getElementById("div_AnswerButton").style.display = "block";
 }
-
-function No() {
-    if(questions[random].difficulty !== -1) questions[random].difficulty--;
-    UpdateLocalStorage();
-    RandomQuestion();
-}
-
 function FindQuestion(){
-    //random = Math.floor(Math.random() * questions.length);
-    questions.sort((a,b) => a.difficulty - b.difficulty);
-    let minDiffValue = questions[0].difficulty;
-    let minDifQuestions = questions.filter(x => x.difficulty === minDiffValue);
-    random = Math.floor(Math.random() * minDifQuestions.length);
+    currentQuestion = currentSelectedQuestions[Math.floor(Math.random()*currentSelectedQuestions.length)];
 }
+//#endregion
 
-function UpdateLocalStorage(){
-    localStorage.removeItem("stored_questions");
-    localStorage.setItem("stored_questions",JSON.stringify(questions))
-}
 
-let questions = [  
-]
+
+
+
+
+//#region Multiple Select
+// var expanded = false;
+
+// function onclick_showCheckboxes() {
+//     var checkboxes = document.getElementById("checkboxes");
+//     if (!expanded) {
+//       checkboxes.style.display = "block";
+//       expanded = true;
+//     } else {
+//       checkboxes.style.display = "none";
+//       expanded = false;
+//     }
+// }
+//#endregion
+
+
+
+
+//#region Question Lists
 
 let cSharpBasicPreparingList = [
     {
@@ -417,7 +452,7 @@ let cSharpBasicVariablesList = [
     }
 ]
 
-cSharpBasicOperatorsList = [
+let cSharpBasicOperatorsList = [
     {
     "level":"C# Basic",
     "subject":"C# Basic-->Operatörler",
@@ -1058,15 +1093,8 @@ let cSharpBasicArraysList = [
     }
 ]
 
-let cSharBasicStringsList = [
+let cSharpBasicStringsList = [
     {
-    "level":"Düzey 1",
-    "subject":"Düzey 1-->Ana Başlık 1-->Alt Başlık 1",
-    "difficulty":0,
-    "question":"Soru 1",
-    "answer":"Cevap 1"
-    }
-    ,{
     "level":"C# Basic",
     "subject":"C# Basic-->String",
     "difficulty":0,
@@ -1284,3 +1312,4 @@ let cSharBasicStringsList = [
     "answer":"Karakter aralığı belirtilebilir.<br>Ayrıca özel karakterlerin yerinde yazılmasını da ifade eder.<br><br>\d{3}[A-E] -> 123A(true) 123H(false)<br>parantezli telefon no formatı -> [(]\d{3}[)] -> özel karakterleri yerinde kullanma"
     }
 ]
+//#endregion
