@@ -23,8 +23,25 @@
                 onclick="onclick_RandomQuestion()">Rastgele Soru Sor</button>
         </div>
     </div>
-    <div class="contentRow" id="div_SubjectSelect" style="display: none;">Konu Seçimi
-
+    <div class="contentRow" id="div_SubjectSelect" style="display: none;">
+        <div>
+            <label for="select_Subjects">Konu seçin(Birden fazla seçmek için CTRL ile basılı tutarak seçin)</label>
+            <select name="subjects" id="select_Subjects" multiple>
+                <option>Hazırlık</option>
+                <option>Değişkenler</option>
+                <option>Operatörler</option>
+                <option>Akış Kontrol</option>
+                <option>Hata Kontrol</option>
+                <option>Döngüler</option>
+                <option>Yardımcı Komutlar</option>
+                <option>Diziler</option>
+                <option>String</option>
+            </select>
+        </div>
+        <div class="buttons">
+            <button id="button_ApplySelectedSubjects" type="button" class="btn btn-primary"
+                    onclick="onclick_ApplySelectedSubjects()">Uygula</button>
+        </div>
     </div>
     <div class="contentRow" id="div_Subject" style="display: none;">
         <h5><span id="span_Subject" style="font-weight: bold;">Konu</span></h5>
@@ -40,11 +57,11 @@
     <div class="contentRow" id="div_Answer" style="display: none;">Cevap</div>
     <div class="contentRow" id="div_YesNoReturnButtons" style="display: none;">
         <div class="buttons">
-            <button id="button_yes" type="button" class="btn btn-primary"
+            <button id="button_yes" type="button" class="btn btn-success"
                     onclick="onclick_Yes()">Bildim</button>
         </div>
         <div class="buttons">
-            <button id="button_no" type="button" class="btn btn-primary"
+            <button id="button_no" type="button" class="btn btn-danger"
                     onclick="onclick_No()">Bilemedim</button>
         </div>
         <div class="buttons">
@@ -52,7 +69,7 @@
                     onclick="onclick_Return()">Başa Dön</button>
         </div>
     </div>
-</div>
+  </div>
 </body>
 
 </html>
