@@ -25,23 +25,18 @@
     </div>
     <div class="contentRow" id="div_SubjectSelect" style="display: none;">
         <div>
-            <label for="select_Subjects">Konu seçin(Birden fazla seçmek için CTRL ile basılı tutarak seçin)</label>
-            <select name="subjects" id="select_Subjects" multiple>
-                <option>Hazırlık</option>
-                <option>Değişkenler</option>
-                <option>Operatörler</option>
-                <option>Akış Kontrol</option>
-                <option>Hata Kontrol</option>
-                <option>Döngüler</option>
-                <option>Yardımcı Komutlar</option>
-                <option>Diziler</option>
-                <option>String</option>
-            </select>
+            <div>
+                <label for="select_Subjects">Konu seçin (CTRL: Çoklu Seçim)</label>
+            </div>
+            <div>
+                <select name="subjects" id="select_Subjects" multiple></select>
+            </div>
+            <div class="buttons">
+                <button id="button_ApplySelectedSubjects" type="button" class="btn btn-primary" 
+                        onclick="onclick_ApplySelectedSubjects()">Uygula</button>
+            </div>
         </div>
-        <div class="buttons">
-            <button id="button_ApplySelectedSubjects" type="button" class="btn btn-primary"
-                    onclick="onclick_ApplySelectedSubjects()">Uygula</button>
-        </div>
+        
     </div>
     <div class="contentRow" id="div_Subject" style="display: none;">
         <h5><span id="span_Subject" style="font-weight: bold;">Konu</span></h5>
